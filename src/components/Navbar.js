@@ -98,7 +98,13 @@ function Navbar({language}){
             </div>
             <SignInModal isOpen={signInModalIsOpen} onClose={signInModalOnClose} onOpen={signInModalOnOpen} />
             <SignUpModal isOpen={signUpModalIsOpen} onClose={signUpModalOnClose} onOpen={signUpModalOnOpen} />
-            <MobileNavigationDrawer isOpen={mobileNavigationDrawerIsOpen} onClose={mobileNavigationDrawerOnClose} onOpen={mobileNavigationDrawerOnOpen} />
+            <MobileNavigationDrawer 
+                isOpen={mobileNavigationDrawerIsOpen} 
+                onClose={mobileNavigationDrawerOnClose} 
+                onOpen={mobileNavigationDrawerOnOpen}
+                signInOnOpen={signInModalOnOpen} 
+                signUpOnOpen={signUpModalOnOpen}
+            />
         </>
     );
 }

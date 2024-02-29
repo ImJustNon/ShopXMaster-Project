@@ -3,13 +3,18 @@ import { Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, DrawerF
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo2_notransparent.png";
 
-function MobileNavigationDrawer({ isOpen, onClose, onOpen,  }){
+function MobileNavigationDrawer({ isOpen, onClose, onOpen, signInOnOpen, signUpOnOpen }){
     const btnRef = React.useRef()
 
 
     function handleClickEditProfileSetting(){
         onClose();
-        
+    }
+
+    function handleSignInOrSignUp(option){
+        onClose();
+        if(option === "signin") return signInOnOpen();
+        if(option === "signup") return signUpOnOpen();
     }
     
     return (
@@ -84,7 +89,29 @@ function MobileNavigationDrawer({ isOpen, onClose, onOpen,  }){
                                     </div>
                                 </div>
                             </Link>
-                            
+
+                            <div className="grid grid-cols-2 pt-20 gap-2">
+                                <button className="btn btn-sm btn-white col-span-1 w-full text-black" onClick={() => handleSignInOrSignUp("signin")}>
+                                    <div className="grid grid-cols-3 gap-4 w-full">
+                                        <div className="text-center">
+                                            <i className="fa-solid fa-right-to-bracket"></i>
+                                        </div>
+                                        <div className="col-span-2 text-left">
+                                            {("Login")}
+                                        </div>
+                                    </div>
+                                </button>
+                                <button className="btn btn-sm btn-white col-span-1 w-full text-black" onClick={() => handleSignInOrSignUp("signup")}>
+                                    <div className="grid grid-cols-3 gap-4 w-full">
+                                        <div className="text-center">
+                                            <i className="fa-solid fa-user-plus"></i>
+                                        </div>
+                                        <div className="col-span-2 text-left">
+                                            {("Register")}
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
                         </div>
                     </DrawerBody>
         
