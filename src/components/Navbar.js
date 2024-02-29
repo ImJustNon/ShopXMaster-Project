@@ -8,6 +8,7 @@ import logo from "../assets/images/logo.png";
 import logo2 from "../assets/images/logo2.png";
 import SignInModal from "./SigninModal";
 import SignUpModal from "./SignupModal";
+import MobileNavigationDrawer from "./MobileNavigationDrawer";
 
 function Navbar({language}){
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,14 +31,20 @@ function Navbar({language}){
     const signUpModalOnOpen = signUpModalDisclosure.onOpen;
     const signUpModalOnClose = signUpModalDisclosure.onClose;
 
+    // mobile navigation drawer
+    const mobileNavigationDrawerDisclosure = useDisclosure();
+    const mobileNavigationDrawerIsOpen = mobileNavigationDrawerDisclosure.isOpen;
+    const mobileNavigationDrawerOnOpen = mobileNavigationDrawerDisclosure.onOpen;
+    const mobileNavigationDrawerOnClose = mobileNavigationDrawerDisclosure.onClose;
+
     return(
         <>
              <div className="navbar fixed text-white z-10 bg-slate-700 bg-opacity-10 backdrop-blur-md shadow-lg" >
                 <div className="container mx-auto">
                     <div className="navbar-start ml-3 md:ml-0">
-                        <div className="flex justify-start items-center flex-row gap-5 cursor-pointer">
+                        <div className="flex justify-start items-center flex-row gap-5">
                             <img src={logo2} className="w-10 hidden rounded-full md:flex" />
-                            <h1 className="text-2xl font-bold">{("SHOP X MASTER")}</h1>
+                            <h1 className="text-2xl font-bold cursor-pointer" onClick={() => navigate("/")}>{("SHOP X MASTER")}</h1>
                         </div>
                     </div>
                     <div className="navbar-center hidden lg:flex">
@@ -83,7 +90,7 @@ function Navbar({language}){
                             </button>
                         </div>
                         {/* Mobile burger button */}
-                        <div className="btn btn-ghost lg:hidden" onClick={() => {}}>
+                        <div className="btn btn-ghost lg:hidden" onClick={mobileNavigationDrawerOnOpen}>
                             <Burger />
                         </div>
                     </div>
@@ -91,6 +98,7 @@ function Navbar({language}){
             </div>
             <SignInModal isOpen={signInModalIsOpen} onClose={signInModalOnClose} onOpen={signInModalOnOpen} />
             <SignUpModal isOpen={signUpModalIsOpen} onClose={signUpModalOnClose} onOpen={signUpModalOnOpen} />
+            <MobileNavigationDrawer isOpen={mobileNavigationDrawerIsOpen} onClose={mobileNavigationDrawerOnClose} onOpen={mobileNavigationDrawerOnOpen} />
         </>
     );
 }

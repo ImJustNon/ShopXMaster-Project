@@ -8,8 +8,9 @@ function SignInModal({ isOpen, onOpen, onClose }){
     const navigate = useNavigate();
 
     const [isShowPassword, setIsShowPassword] = useState(false);
-    const [inputUserPassword, setInputUserPassword] = useState("");
+    
     const [inputUserName, setInputUserName] = useState("");
+    const [inputUserPassword, setInputUserPassword] = useState("");
     function handleShowPassword(){
         setIsShowPassword(prev => {
             if(!prev) return true;
@@ -18,11 +19,24 @@ function SignInModal({ isOpen, onOpen, onClose }){
     }
 
     function handleSubmit(){
-        
+        fetch("https://shopxmaster-api.nonlnwza.xyz/api/user/validate", {
+            method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+                userName: inputUserName,
+                userPassword: inputUserPassword,
+			}),
+        }).then(response => response.json()).then(response =>{
+            if(response.status === "FAIL"){
+                return console.log(response.message);
+            }
+        }).catch(e => console.log(e));
     }
 
     function handleDiscord(){
-
+        
     }
 
     return(

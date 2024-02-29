@@ -22,12 +22,21 @@ function SignUpModal({ isOpen, onOpen, onClose }){
     }
 
     function handleSubmit(){
-        fetch("https://shopxmaster-api.nonlnwza.xyz/api/user/validate", {
+        fetch("https://shopxmaster-api.nonlnwza.xyz/api/user/register", {
             method: "POST",
-            headers: {
-                
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+                userName: inputUserName,
+				userEmail: inputUserEmail,
+				userPassword: inputUserPassword
+			}),
+        }).then(response => response.json()).then(response =>{
+            if(response.status === "FAIL"){
+                return console.log(response.message);
             }
-        })
+        }).catch(e => console.log(e));
     }
 
     useEffect(() =>{
