@@ -1,38 +1,67 @@
-.App {
-  text-align: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Josefin+Sans&family=Playpen+Sans&family=Prompt&family=Sriracha&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mali&display=swap');
+
+* {
+	font-family: 'Itim', cursive;
+	/* font-family: 'Mali', cursive; */
+}
+.set-bg {
+	width: 100%;
+	height: 100%;
+	/* background-image: radial-gradient(ellipse, rgba(250, 250, 250, 1) 0%, rgba(165, 168, 172, 1) 100%); */
+	background: url("https://xenonhub.pro/assets/video/background.mp4");
+	background-size: cover;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	position: fixed;
+	z-index: -1;
+}
+.font-itim {
+	font-family: 'Itim', cursive;
+}
+.font-playpen {
+	font-family: 'Playpen Sans', cursive;
+}
+.font-prompt {
+	font-family: 'Prompt', sans-serif;
+}
+.font-sriracha {
+	font-family: 'Sriracha', cursive;
+}
+.font-josefin {
+	font-family: 'Josefin Sans', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.noselect {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently
+	supported by Chrome, Edge, Opera and Firefox */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+::-webkit-scrollbar {
+	width: 5px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+::-webkit-scrollbar-track {
+	background: black;
 }
 
-.App-link {
-  color: #61dafb;
+::-webkit-scrollbar-thumb {
+	background: white;
+	border-radius: 50px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+::-webkit-scrollbar-thumb:hover {
+	background: white;
+	border-radius: 50px;
 }
+
+

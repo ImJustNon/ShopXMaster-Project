@@ -1,24 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
+import VideoBackground from './components/VideoBackground';
+import { ChakraProvider } from '@chakra-ui/react'
+import Router from './routes/router';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+		<ChakraProvider>
+			<VideoBackground />
+			<div className="relative text-white text-center">
+				<Router />
+			</div>
+		</ChakraProvider>
+    </>
   );
 }
 

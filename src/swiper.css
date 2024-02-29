@@ -1,0 +1,19 @@
+.swiper {
+    width: 100%;
+}
+  
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: auto;
+    height: 40vh;
+}
+
+.swiper-slide img {
+    display: block;
+    height: 100%;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #ffffff !important;   
+}
