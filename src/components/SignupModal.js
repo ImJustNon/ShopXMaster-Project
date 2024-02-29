@@ -81,7 +81,7 @@ function SignUpModal({ isOpen, onOpen, onClose }){
                                     <i className="fa-solid fa-envelope col-span-1"></i>
                                     <h1 className="font-normal col-span-11">E-Mail</h1>
                                 </div>
-                                <Input type="text" placeholder='E-mail' onChange={(event) => setInputUserEmail(event.target.value)} />
+                                <Input type="email" placeholder='E-mail' onChange={(event) => setInputUserEmail(event.target.value)} />
                             </div>
 
                             <div className="flex flex-col gap-2">
