@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, Input, ModalFooter } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
@@ -8,8 +8,12 @@ function SignUpModal({ isOpen, onOpen, onClose }){
     const navigate = useNavigate();
 
     const [isShowPassword, setIsShowPassword] = useState(false);
-    const [inputUserPassword, setInputUserPassword] = useState("");
+    const [isPasswordNotMatch, setIsPasswordNotMatch] = useState(false);
+
     const [inputUserName, setInputUserName] = useState("");
+    const [inputUserEmail, setInputUserEmail] = useState("");
+    const [inputUserPassword, setInputUserPassword] = useState("");
+    const [inputUserConfirmPassword, setInputUserConfirmPassword] = useState("");
     function handleShowPassword(){
         setIsShowPassword(prev => {
             if(!prev) return true;
@@ -18,12 +22,18 @@ function SignUpModal({ isOpen, onOpen, onClose }){
     }
 
     function handleSubmit(){
-        
+        fetch("https://shopxmaster-api.nonlnwza.xyz/api/user/validate", {
+            method: "POST",
+            headers: {
+                
+            }
+        })
     }
 
-    function handleDiscord(){
-
-    }
+    useEffect(() =>{
+        if(inputUserPassword !== inputUserConfirmPassword && inputUserConfirmPassword.length !== 0) return setIsPasswordNotMatch(true);
+        else return setIsPasswordNotMatch(false);
+    }, [inputUserPassword, inputUserConfirmPassword]);
 
     return(
         <>
@@ -40,10 +50,10 @@ function SignUpModal({ isOpen, onOpen, onClose }){
                     <ModalHeader>
                         <div className="flex flex-col text-center gap-1">
                             <div className="text-2xl font-light text-white">
-                                SignIn                    
+                                Register                    
                             </div>
                             <div className="text-lg font-normal text-white">
-                                to Your Account
+                                to Create Your Account
                             </div>
                         </div>
                     </ModalHeader>
@@ -55,6 +65,14 @@ function SignUpModal({ isOpen, onOpen, onClose }){
                                     <h1 className="font-normal col-span-11">Username</h1>
                                 </div>
                                 <Input type="text" placeholder='Username' onChange={(event) => setInputUserName(event.target.value)} />
+                            </div>
+
+                            <div className="flex flex-col gap-2">
+                                <div className="grid grid-cols-12 text-white">
+                                    <i className="fa-solid fa-envelope col-span-1"></i>
+                                    <h1 className="font-normal col-span-11">E-Mail</h1>
+                                </div>
+                                <Input type="text" placeholder='E-mail' onChange={(event) => setInputUserEmail(event.target.value)} />
                             </div>
 
                             <div className="flex flex-col gap-2">
@@ -73,15 +91,21 @@ function SignUpModal({ isOpen, onOpen, onClose }){
                                     </div>
                                 </div>
                             </div>
+
+                            <div className="flex flex-col gap-2">
+                                <div className="grid grid-cols-12 text-white">
+                                    <i className="fa-solid fa-lock col-span-1"></i>
+                                    <h1 className="font-normal col-span-11">Comfirm Password</h1>
+                                </div>
+                                <Input type="password" placeholder='Confirm Password' onChange={(event) => setInputUserConfirmPassword(event.target.value)} />
+                                <p className={`text-error ${isPasswordNotMatch ? "flex" : "hidden"}`}>Password Not match</p>
+                            </div>
                         </div>
                     </ModalBody>
 
                     <ModalFooter>
                         <div className="flex flex-col w-full gap-5">
-                            <div className="grid grid-cols-8 gap-2">
-                                <Button onClick={() => handleSubmit()} className="w-full col-span-6"><i className="fa-solid fa-right-to-bracket mr-3"></i>Login</Button>
-                                <Button onClick={() => handleDiscord()} className="w-full col-span-2"><i className="fa-brands fa-discord text-primary"></i></Button>
-                            </div>
+                            <Button onClick={() => handleSubmit()} className="w-full col-span-6"><i className="fa-solid fa-user-plus mr-3"></i>Register</Button>
                             <Button onClick={onClose} className="w-full">Cancel</Button>
                         </div>
                     </ModalFooter>

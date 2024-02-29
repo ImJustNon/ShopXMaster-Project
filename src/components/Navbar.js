@@ -76,7 +76,7 @@ function Navbar({language}){
                             </button>
                             <button 
                                 className={`btn btn-md font-normal btn-ghost text-lg text-white ${true ? "btn-active" : ""}`} 
-                                onClick={() => ""}
+                                onClick={signUpModalOnOpen}
                             >
                                 <i className="fa-solid fa-user-plus"></i>
                                 Register
