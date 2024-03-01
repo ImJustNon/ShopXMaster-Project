@@ -55,7 +55,7 @@ function SignUpModal({ isOpen, onOpen, onClose }){
                 motionPreset='scale'
             >
                 <ModalOverlay style={{ backdropFilter: "blur(5px)" }} />
-                <ModalContent bgColor={"#3f3f40"} >
+                <ModalContent bgColor={"#3f3f40"} boxSize={"auto"} borderRadius={10} >
                     <ModalHeader>
                         <div className="flex flex-col text-center gap-1">
                             <div className="text-2xl font-light text-white">
