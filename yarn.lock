@@ -9092,6 +9092,11 @@ react-dev-utils@^12.0.1:
     strip-ansi "^6.0.1"
     text-table "^0.2.0"
 
+react-discord-login@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-discord-login/-/react-discord-login-2.1.0.tgz#1f73e4e169744e948901e26d2692741dd709d6c0"
+  integrity sha512-FjcT/xWpb94glof4h7yI2UgZcY9QAS9Sbz0zJ8DZ31JEhoIST941BhdD6DNSK6gWh6u8/N4yMLGIE5wL9tM9dg==
+
 react-dom@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"

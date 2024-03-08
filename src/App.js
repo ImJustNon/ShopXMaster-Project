@@ -10,30 +10,31 @@ import { setUserToken } from './utils/manageUserToken';
 function App() {
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
-	const getTokenParam = searchParams.get('token');
+	const getCodeParam = searchParams.get('code');
 
 	const navigate = useNavigate();
 
 	useEffect(() =>{
-		if(!getTokenParam || getTokenParam.length < 0){
+		if(!getCodeParam || getCodeParam.length < 0){
 			return;
 		}
 		
 		// validate token
-		fetch("https://shopxmaster-api.nonlnwza.xyz/user/token/validate", {
+		fetch("http://localhost:3030/api/user/auth/discord/exchange", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				userToken: getTokenParam,
+				code: getCodeParam,
 			}),
 		}).then(response => response.json()).then(response =>{
 			if(response.status === "FAIL"){
-				console.log(response.message);
+				return console.log(response.message);
 			}
 			if(response.status === "OK"){
-				setUserToken(response.data.userToken);
+				console.log(response);
+				// setUserToken(response.data.userToken);
 			}
 			navigate("/");
 		}).catch(e =>{

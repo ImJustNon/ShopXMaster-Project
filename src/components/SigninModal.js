@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, Input, ModalFooter } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { useDiscordLogin } from 'react-discord-login';
 
 function SignInModal({ isOpen, onOpen, onClose }){
     const initialRef = React.useRef(null);
@@ -36,7 +37,7 @@ function SignInModal({ isOpen, onOpen, onClose }){
     }
 
     function handleDiscord(){
-        
+        return window.location.href = "http://localhost:3030/api/user/auth/discord";
     }
 
     return(
