@@ -9,6 +9,7 @@ function SignUpModal({ isOpen, onOpen, onClose }){
 
     const [isShowPassword, setIsShowPassword] = useState(false);
     const [isPasswordNotMatch, setIsPasswordNotMatch] = useState(false);
+    const [isError, setIsError] = useState(null);
 
     const [inputUserName, setInputUserName] = useState("");
     const [inputUserEmail, setInputUserEmail] = useState("");
@@ -22,20 +23,22 @@ function SignUpModal({ isOpen, onOpen, onClose }){
     }
 
     function handleSubmit(){
-        fetch("https://shopxmaster-api.nonlnwza.xyz/api/user/register", {
+        fetch("http://localhost:3030/api/user/auth/normal/create", {
             method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-                userName: inputUserName,
-				userEmail: inputUserEmail,
-				userPassword: inputUserPassword
+                user_name: inputUserName,
+				user_email: inputUserEmail,
+				user_password: inputUserPassword
 			}),
         }).then(response => response.json()).then(response =>{
             if(response.status === "FAIL"){
+                setIsError(response.message);
                 return console.log(response.message);
             }
+            return onClose();
         }).catch(e => console.log(e));
     }
 
@@ -73,7 +76,10 @@ function SignUpModal({ isOpen, onOpen, onClose }){
                                     <i className="fa-solid fa-user col-span-1"></i>
                                     <h1 className="font-normal col-span-11">Username</h1>
                                 </div>
-                                <Input type="text" placeholder='Username' onChange={(event) => setInputUserName(event.target.value)} />
+                                <Input className="text-white" type="text" placeholder='Username' onChange={(event) =>{
+                                    setInputUserName(event.target.value);
+                                    setIsError(null);
+                                }} />
                             </div>
 
                             <div className="flex flex-col gap-2">
@@ -81,7 +87,10 @@ function SignUpModal({ isOpen, onOpen, onClose }){
                                     <i className="fa-solid fa-envelope col-span-1"></i>
                                     <h1 className="font-normal col-span-11">E-Mail</h1>
                                 </div>
-                                <Input type="email" placeholder='E-mail' onChange={(event) => setInputUserEmail(event.target.value)} />
+                                <Input className="text-white" type="email" placeholder='E-mail' onChange={(event) =>{ 
+                                    setInputUserEmail(event.target.value);
+                                    setIsError(null);
+                                }} />
                             </div>
 
                             <div className="flex flex-col gap-2">
@@ -90,7 +99,10 @@ function SignUpModal({ isOpen, onOpen, onClose }){
                                     <h1 className="font-normal col-span-11">Password</h1>
                                 </div>
                                 <div className="grid grid-cols-8 items-center gap-5 text-white">
-                                    <Input type={`${isShowPassword ? "text" : "password"}`} className="col-span-7" placeholder='Password' onChange={(event) => setInputUserPassword(event.target.value)} />
+                                    <Input type={`${isShowPassword ? "text" : "password"}`} className="col-span-7" placeholder='Password' onChange={(event) =>{
+                                        setInputUserPassword(event.target.value);
+                                        setIsError(null);
+                                    }} />
                                     <div className="cursor-pointer" onClick={() => handleShowPassword()}>
                                         {isShowPassword ? 
                                             <i className="fa-solid fa-eye fa-lg"></i>
@@ -106,9 +118,14 @@ function SignUpModal({ isOpen, onOpen, onClose }){
                                     <i className="fa-solid fa-lock col-span-1"></i>
                                     <h1 className="font-normal col-span-11">Comfirm Password</h1>
                                 </div>
-                                <Input type="password" placeholder='Confirm Password' onChange={(event) => setInputUserConfirmPassword(event.target.value)} />
+                                <Input className="text-white" type="password" placeholder='Confirm Password' onChange={(event) =>{
+                                    setInputUserConfirmPassword(event.target.value);
+                                    setIsError(null);
+                                }} />
                                 <p className={`text-error ${isPasswordNotMatch ? "flex" : "hidden"}`}>Password Not match</p>
                             </div>
+
+                            <p className={`text-error ${isError ? "" : "hidden"}`}>{isError}</p>
                         </div>
                     </ModalBody>
 

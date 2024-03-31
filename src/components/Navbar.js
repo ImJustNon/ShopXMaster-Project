@@ -9,14 +9,25 @@ import logo2 from "../assets/images/logo2.png";
 import SignInModal from "./SigninModal";
 import SignUpModal from "./SignupModal";
 import MobileNavigationDrawer from "./MobileNavigationDrawer";
+import { getClientUserToken, removeClientUserToken } from "../utils/clientUserToken";
 
 function Navbar({language}){
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+    const [isLogin, setIsLogin] = useState(false);
 
     const navigate = useNavigate();
 
     const { pathname } = useLocation();
+
+    useEffect(() =>{
+        if(getClientUserToken()){  
+            setIsLogin(true);
+        }
+    }, []);
+
+    function handleLogout(){
+        removeClientUserToken();
+    }
 
 
     // signin modal Disclosure
@@ -73,23 +84,37 @@ function Navbar({language}){
                         </div>
                     </div>
                     <div className="navbar-end text-end">
-                        <div className="lg:flex justify-end gap-3 hidden">
-                            <button 
-                                className={`btn btn-md font-normal btn-ghost text-lg text-white ${true ? "btn-active" : ""}`} 
-                                onClick={signInModalOnOpen}
-                            >
-                                <i className="fa-solid fa-right-to-bracket"></i>
-                                Login
-                            </button>
-                            <button 
-                                className={`btn btn-md font-normal btn-ghost text-lg text-white ${true ? "btn-active" : ""}`} 
-                                onClick={signUpModalOnOpen}
-                            >
-                                <i className="fa-solid fa-user-plus"></i>
-                                Register
-                            </button>
-                        </div>
-                        {/* Mobile burger button */}
+                        {
+                            isLogin ? 
+                            <div className="justify-end gap-3 hidden lg:flex ">
+                                <button 
+                                    className={`btn btn-md font-normal btn-ghost text-lg text-white ${true ? "btn-active" : ""}`} 
+                                    onClick={() => handleLogout()}
+                                >
+                                    <i className="fa-solid fa-right-to-bracket"></i>
+                                    Logout
+                                </button>
+                            </div>
+                            :
+                            <div className="justify-end gap-3 hidden lg:flex ">
+                                <button 
+                                    className={`btn btn-md font-normal btn-ghost text-lg text-white ${true ? "btn-active" : ""}`} 
+                                    onClick={signInModalOnOpen}
+                                >
+                                    <i className="fa-solid fa-right-to-bracket"></i>
+                                    Login
+                                </button>
+                                <button 
+                                    className={`btn btn-md font-normal btn-ghost text-lg text-white ${true ? "btn-active" : ""}`} 
+                                    onClick={signUpModalOnOpen}
+                                >
+                                    <i className="fa-solid fa-user-plus"></i>
+                                    Register
+                                </button>
+                            </div>
+                        }
+                        
+                        {/* /* Mobile burger button * */}
                         <div className="btn btn-ghost lg:hidden" onClick={mobileNavigationDrawerOnOpen}>
                             <Burger />
                         </div>
