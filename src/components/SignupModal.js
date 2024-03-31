@@ -24,6 +24,9 @@ function SignUpModal({ isOpen, onOpen, onClose }){
     }
 
     function handleSubmit(){
+        if(isPasswordNotMatch){
+            return;
+        }
         fetch(`${config.apis.backend.baseEndpoint}/api/user/auth/normal/create`, {
             method: "POST",
 			headers: {
