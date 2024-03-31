@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo2_notransparent.png";
+import { getClientUserToken, removeClientUserToken } from "../utils/manageUserToken";
 
 function MobileNavigationDrawer({ isOpen, onClose, onOpen, signInOnOpen, signUpOnOpen }){
-    const btnRef = React.useRef()
+    const btnRef = React.useRef();
+    const [isLogin, setIsLogin] = useState(false);
+
+    useEffect(() =>{
+        if(getClientUserToken()){
+            setIsLogin(true);
+        }
+    }, []);
 
 
     function handleClickEditProfileSetting(){
@@ -15,6 +23,10 @@ function MobileNavigationDrawer({ isOpen, onClose, onOpen, signInOnOpen, signUpO
         onClose();
         if(option === "signin") return signInOnOpen();
         if(option === "signup") return signUpOnOpen();
+    }
+
+    function handleLogout(){
+        removeClientUserToken();
     }
     
     return (
@@ -91,26 +103,43 @@ function MobileNavigationDrawer({ isOpen, onClose, onOpen, signInOnOpen, signUpO
                             </Link>
 
                             <div className="grid grid-cols-2 pt-20 gap-2">
-                                <button className="btn btn-sm btn-white col-span-1 w-full text-black" onClick={() => handleSignInOrSignUp("signin")}>
-                                    <div className="grid grid-cols-3 gap-4 w-full">
-                                        <div className="text-center">
-                                            <i className="fa-solid fa-right-to-bracket"></i>
-                                        </div>
-                                        <div className="col-span-2 text-left">
-                                            {("Login")}
-                                        </div>
-                                    </div>
-                                </button>
-                                <button className="btn btn-sm btn-white col-span-1 w-full text-black" onClick={() => handleSignInOrSignUp("signup")}>
-                                    <div className="grid grid-cols-3 gap-4 w-full">
-                                        <div className="text-center">
-                                            <i className="fa-solid fa-user-plus"></i>
-                                        </div>
-                                        <div className="col-span-2 text-left">
-                                            {("Register")}
-                                        </div>
-                                    </div>
-                                </button>
+                                {
+                                    isLogin ?
+                                        <button className="btn btn-sm btn-white col-span-2 w-fit mx-auto text-black" onClick={() => handleLogout()}>
+                                            <div className="grid grid-cols-3 gap-4 w-full px-3">
+                                                <div className="text-center">
+                                                    <i className="fa-solid fa-right-to-bracket"></i>
+                                                </div>
+                                                <div className="col-span-2 text-left">
+                                                    {("Logout")}
+                                                </div>
+                                            </div>
+                                        </button>
+                                    :
+                                    <>
+                                        <button className="btn btn-sm btn-white col-span-1 w-full text-black" onClick={() => handleSignInOrSignUp("signin")}>
+                                            <div className="grid grid-cols-3 gap-4 w-full">
+                                                <div className="text-center">
+                                                    <i className="fa-solid fa-right-to-bracket"></i>
+                                                </div>
+                                                <div className="col-span-2 text-left">
+                                                    {("Login")}
+                                                </div>
+                                            </div>
+                                        </button>
+                                        <button className="btn btn-sm btn-white col-span-1 w-full text-black" onClick={() => handleSignInOrSignUp("signup")}>
+                                            <div className="grid grid-cols-3 gap-4 w-full">
+                                                <div className="text-center">
+                                                    <i className="fa-solid fa-user-plus"></i>
+                                                </div>
+                                                <div className="col-span-2 text-left">
+                                                    {("Register")}
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </>
+                                }
+                                
                             </div>
                         </div>
                     </DrawerBody>

@@ -5,7 +5,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import Router from './routes/router';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { setUserToken } from './utils/manageUserToken';
+import { setClientUserToken } from './utils/manageUserToken';
 
 function App() {
 	const location = useLocation();
@@ -32,11 +32,8 @@ function App() {
 			if(response.status === "FAIL"){
 				return console.log(response.message);
 			}
-			if(response.status === "OK"){
-				console.log(response);
-				// setUserToken(response.data.userToken);
-			}
-			navigate("/");
+			setClientUserToken(response.user_token);
+			return setTimeout(() => window.location.replace("/"), 200);
 		}).catch(e =>{
 			console.log(e);
 			navigate("/");
