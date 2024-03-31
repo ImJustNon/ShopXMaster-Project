@@ -1,18 +1,21 @@
-function setUserToken(token){
-    return localStorage.setItem("user_token", String(token));
+function setClientUserToken(token){
+    localStorage.setItem("client_user_token", String(token));
+    return;
 }
 
-function getUserToken(){
-    return localStorage.getItem("user_token");
+function getClientUserToken(){
+    return localStorage.getItem("client_user_token");
 }
 
-function removeUserToken(){
-    return localStorage.removeItem("user_token");
+function removeClientUserToken(){
+    localStorage.removeItem("client_user_token");
+    window.location.reload();
+    return;
 }
 
 
 export {
-    setUserToken,
-    getUserToken,
-    removeUserToken
+    setClientUserToken,
+    getClientUserToken,
+    removeClientUserToken
 }

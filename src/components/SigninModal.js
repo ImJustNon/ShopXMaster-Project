@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, Input, ModalFooter } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { setClientUserToken } from "../utils/clientUserToken";
+import { setClientUserToken } from "../utils/manageUserToken";
 
 function SignInModal({ isOpen, onOpen, onClose }){
     const initialRef = React.useRef(null);

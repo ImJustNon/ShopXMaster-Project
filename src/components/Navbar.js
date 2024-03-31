@@ -9,7 +9,7 @@ import logo2 from "../assets/images/logo2.png";
 import SignInModal from "./SigninModal";
 import SignUpModal from "./SignupModal";
 import MobileNavigationDrawer from "./MobileNavigationDrawer";
-import { getClientUserToken, removeClientUserToken } from "../utils/clientUserToken";
+import { getClientUserToken, removeClientUserToken } from "../utils/manageUserToken";
 
 function Navbar({language}){
     const [isMenuOpen, setIsMenuOpen] = useState(false);
