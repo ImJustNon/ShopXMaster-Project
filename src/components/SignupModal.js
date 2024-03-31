@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, Input, ModalFooter } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { config } from "../config/config";
 
 function SignUpModal({ isOpen, onOpen, onClose }){
     const initialRef = React.useRef(null);
@@ -23,7 +24,7 @@ function SignUpModal({ isOpen, onOpen, onClose }){
     }
 
     function handleSubmit(){
-        fetch("https://shop-x-master-project-backend.vercel.app/api/user/auth/normal/create", {
+        fetch(`${config.apis.backend.baseEndpoint}/api/user/auth/normal/create`, {
             method: "POST",
 			headers: {
 				"Content-Type": "application/json",

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, Input, ModalFooter } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { setClientUserToken } from "../utils/manageUserToken";
+import { config } from "../config/config";
 
 function SignInModal({ isOpen, onOpen, onClose }){
     const initialRef = React.useRef(null);
@@ -22,7 +23,7 @@ function SignInModal({ isOpen, onOpen, onClose }){
     }
 
     function handleSubmit(){
-        fetch("https://shop-x-master-project-backend.vercel.app/api/user/auth/normal/validate", {
+        fetch(`${config.apis.backend.baseEndpoint}/api/user/auth/normal/validate`, {
             method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -42,7 +43,7 @@ function SignInModal({ isOpen, onOpen, onClose }){
     }
 
     function handleDiscord(){
-        return window.location.href = "http://localhost:3030/api/user/auth/discord";
+        return window.location.href = `${config.apis.backend.baseEndpoint}/api/user/auth/discord`;
     }
 
     return(

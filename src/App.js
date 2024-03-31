@@ -6,6 +6,7 @@ import Router from './routes/router';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { setClientUserToken } from './utils/manageUserToken';
+import { config } from './config/config';
 
 function App() {
 	const location = useLocation();
@@ -20,7 +21,7 @@ function App() {
 		}
 		
 		// validate token
-		fetch("https://shop-x-master-project-backend.vercel.app/api/user/auth/discord/exchange", {
+		fetch(`${config.apis.backend.baseEndpoint}/api/user/auth/discord/exchange`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
