@@ -20,7 +20,7 @@ function App() {
 		}
 		
 		// validate token
-		fetch("http://localhost:3030/api/user/auth/discord/exchange", {
+		fetch("https://shop-x-master-project-backend.vercel.app/api/user/auth/discord/exchange", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

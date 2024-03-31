@@ -22,7 +22,7 @@ function SignInModal({ isOpen, onOpen, onClose }){
     }
 
     function handleSubmit(){
-        fetch("http://localhost:3030/api/user/auth/normal/validate", {
+        fetch("https://shop-x-master-project-backend.vercel.app/api/user/auth/normal/validate", {
             method: "POST",
 			headers: {
 				"Content-Type": "application/json",
